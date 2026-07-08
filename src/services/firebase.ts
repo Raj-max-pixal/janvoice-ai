@@ -156,12 +156,6 @@ export async function updateUserProfile(uid: string, updates: Partial<User>): Pr
 
 // Demo mode storage helpers (localStorage)
 const DEMO_COMPLAINTS_KEY = 'janvoice_demo_complaints'
-const DEMO_USERS_KEY = 'janvoice_demo_users'
-const DEMO_DEPARTMENTS_KEY = 'janvoice_demo_departments'
-const DEMO_COMMENTS_KEY = 'janvoice_demo_comments'
-const DEMO_AUDIT_LOGS_KEY = 'janvoice_demo_audit_logs'
-const DEMO_NOTIFICATIONS_KEY = 'janvoice_demo_notifications'
-const DEMO_PETITIONS_KEY = 'janvoice_demo_petitions'
 
 function getDemoData<T>(key: string): T[] {
   try {

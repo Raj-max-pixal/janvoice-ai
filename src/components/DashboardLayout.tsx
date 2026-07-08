@@ -12,7 +12,6 @@ import {
   Menu,
   X,
   Shield,
-  Bell,
   Search,
   ChevronDown,
   Moon,

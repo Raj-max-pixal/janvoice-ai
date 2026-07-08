@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback, useMemo, useRef } from 'react'
-import { MapPin, Navigation, X, Maximize2, Minimize2, RefreshCw, Search, Eye, ArrowRight } from 'lucide-react'
+import { MapPin, Navigation, X, Maximize2, Minimize2, RefreshCw, Search, Eye } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { DashboardLayout } from '../components/DashboardLayout'
 import { Card } from '../components/ui/Card'
