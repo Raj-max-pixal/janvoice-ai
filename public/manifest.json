@@ -1,0 +1,22 @@
+{
+  "name": "JanVoice AI",
+  "short_name": "JanVoice",
+  "description": "AI-powered civic engagement platform for transparent public feedback and issue resolution",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#061e38",
+  "theme_color": "#00b4d8",
+  "orientation": "any",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["government", "productivity", "utilities"],
+  "lang": "en",
+  "dir": "ltr"
+}
