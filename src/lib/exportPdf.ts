@@ -229,6 +229,123 @@ export function exportComplaintListPdf(complaints: Complaint[], title: string = 
 }
 
 // ==========================================
+// Report Data PDF Export
+// ==========================================
+
+/**
+ * Exports a ReportData object as a printable PDF report.
+ * This is the function imported by ReportsPage as exportToPdf.
+ */
+export function exportToPdf(reportData: {
+  title: string
+  period: string
+  generatedAt: string
+  totalComplaints: number
+  resolvedComplaints: number
+  pendingComplaints: number
+  inProgressComplaints: number
+  rejectedComplaints: number
+  averageResolutionTime: number
+  complaintsByCategory: Array<{ category: string; count: number; percentage: number }>
+  complaintsByDepartment: Array<{ department: string; count: number; percentage: number }>
+  departmentPerformance: Array<{ department: string; resolved: number; pending: number; total: number }>
+  officerPerformance: Array<{ officer: string; resolved: number; total: number }>
+  dailyTrend: Array<{ date: string; count: number }>
+}): void {
+  const overviewRows = `
+    <table>
+      <tr><td><strong>Total Complaints</strong></td><td>${reportData.totalComplaints}</td></tr>
+      <tr><td><strong>Resolved</strong></td><td>${reportData.resolvedComplaints}</td></tr>
+      <tr><td><strong>Pending</strong></td><td>${reportData.pendingComplaints}</td></tr>
+      <tr><td><strong>In Progress</strong></td><td>${reportData.inProgressComplaints}</td></tr>
+      <tr><td><strong>Rejected</strong></td><td>${reportData.rejectedComplaints}</td></tr>
+      <tr><td><strong>Avg Resolution Time</strong></td><td>${reportData.averageResolutionTime} days</td></tr>
+    </table>`
+
+  const categoryRows = reportData.complaintsByCategory
+    .map(
+      (c) =>
+        `<tr><td>${c.category}</td><td>${c.count}</td><td>${c.percentage}%</td></tr>`,
+    )
+    .join('')
+
+  const deptRows = reportData.departmentPerformance
+    .map(
+      (d) =>
+        `<tr><td>${d.department}</td><td>${d.resolved}</td><td>${d.pending}</td><td>${d.total}</td></tr>`,
+    )
+    .join('')
+
+  const officerRows = reportData.officerPerformance
+    .map(
+      (o) =>
+        `<tr><td>${o.officer}</td><td>${o.resolved}</td><td>${o.total}</td></tr>`,
+    )
+    .join('')
+
+  const trendRows = reportData.dailyTrend
+    .map(
+      (t) =>
+        `<tr><td>${t.date}</td><td>${t.count}</td></tr>`,
+    )
+    .join('')
+
+  let bodyHtml = `
+    <p class="meta">Period: ${reportData.period} | Generated: ${reportData.generatedAt}</p>
+
+    <div class="section">
+      <h2>Overview</h2>
+      ${overviewRows}
+    </div>`
+
+  if (reportData.complaintsByCategory.length > 0) {
+    bodyHtml += `
+    <div class="section">
+      <h2>Complaints by Category</h2>
+      <table>
+        <thead><tr><th>Category</th><th>Count</th><th>Percentage</th></tr></thead>
+        <tbody>${categoryRows}</tbody>
+      </table>
+    </div>`
+  }
+
+  if (reportData.departmentPerformance.length > 0) {
+    bodyHtml += `
+    <div class="section">
+      <h2>Department Performance</h2>
+      <table>
+        <thead><tr><th>Department</th><th>Resolved</th><th>Pending</th><th>Total</th></tr></thead>
+        <tbody>${deptRows}</tbody>
+      </table>
+    </div>`
+  }
+
+  if (reportData.officerPerformance.length > 0) {
+    bodyHtml += `
+    <div class="section">
+      <h2>Officer Performance</h2>
+      <table>
+        <thead><tr><th>Officer</th><th>Resolved</th><th>Total</th></tr></thead>
+        <tbody>${officerRows}</tbody>
+      </table>
+    </div>`
+  }
+
+  if (reportData.dailyTrend.length > 0) {
+    bodyHtml += `
+    <div class="section">
+      <h2>Daily Trend</h2>
+      <table>
+        <thead><tr><th>Date</th><th>Complaints</th></tr></thead>
+        <tbody>${trendRows}</tbody>
+      </table>
+    </div>`
+  }
+
+  printHtml(reportData.title, bodyHtml)
+}
+
+// ==========================================
 // Analytics Report PDF
 // ==========================================
 

@@ -221,3 +221,100 @@ export function exportAnalyticsExcel(snapshot: AnalyticsSnapshot): void {
   const filename = `analytics-export-${new Date().toISOString().split('T')[0]}.csv`
   downloadCsv(combined, filename)
 }
+
+// ==========================================
+// Report Data Excel Export
+// ==========================================
+
+/**
+ * Exports report data as a CSV file (openable in Excel).
+ * This is the function imported by ReportsPage as exportToExcel.
+ */
+export function exportToExcel(reportData: {
+  title: string
+  period: string
+  generatedAt: string
+  totalComplaints: number
+  resolvedComplaints: number
+  pendingComplaints: number
+  inProgressComplaints: number
+  rejectedComplaints: number
+  averageResolutionTime: number
+  complaintsByCategory: Array<{ category: string; count: number; percentage: number }>
+  complaintsByDepartment: Array<{ department: string; count: number; percentage: number }>
+  departmentPerformance: Array<{ department: string; resolved: number; pending: number; total: number }>
+  officerPerformance: Array<{ officer: string; resolved: number; total: number }>
+  dailyTrend: Array<{ date: string; count: number }>
+}): void {
+  const lines: string[] = []
+
+  // Title and metadata
+  lines.push(`"${reportData.title}"`)
+  lines.push(`"Period: ${reportData.period}"`)
+  lines.push(`"Generated: ${reportData.generatedAt}"`)
+  lines.push('')
+
+  // Overview section
+  lines.push('Overview')
+  const overviewHeaders = ['Metric', 'Value']
+  const overviewData = [
+    { metric: 'Total Complaints', value: reportData.totalComplaints },
+    { metric: 'Resolved', value: reportData.resolvedComplaints },
+    { metric: 'Pending', value: reportData.pendingComplaints },
+    { metric: 'In Progress', value: reportData.inProgressComplaints },
+    { metric: 'Rejected', value: reportData.rejectedComplaints },
+    { metric: 'Avg Resolution (days)', value: reportData.averageResolutionTime },
+  ]
+  lines.push(toCsv(overviewHeaders, overviewData, [(r) => r.metric, (r) => r.value]))
+  lines.push('')
+
+  // Complaints by Category
+  if (reportData.complaintsByCategory.length > 0) {
+    lines.push('Complaints by Category')
+    const catHeaders = ['Category', 'Count', 'Percentage']
+    lines.push(toCsv(catHeaders, reportData.complaintsByCategory, [
+      (r) => r.category,
+      (r) => r.count,
+      (r) => `${r.percentage}%`,
+    ]))
+    lines.push('')
+  }
+
+  // Department Performance
+  if (reportData.departmentPerformance.length > 0) {
+    lines.push('Department Performance')
+    const deptHeaders = ['Department', 'Resolved', 'Pending', 'Total']
+    lines.push(toCsv(deptHeaders, reportData.departmentPerformance, [
+      (r) => r.department,
+      (r) => r.resolved,
+      (r) => r.pending,
+      (r) => r.total,
+    ]))
+    lines.push('')
+  }
+
+  // Officer Performance
+  if (reportData.officerPerformance.length > 0) {
+    lines.push('Officer Performance')
+    const offHeaders = ['Officer', 'Resolved', 'Total']
+    lines.push(toCsv(offHeaders, reportData.officerPerformance, [
+      (r) => r.officer,
+      (r) => r.resolved,
+      (r) => r.total,
+    ]))
+    lines.push('')
+  }
+
+  // Daily Trend
+  if (reportData.dailyTrend.length > 0) {
+    lines.push('Daily Trend')
+    const trendHeaders = ['Date', 'Complaints']
+    lines.push(toCsv(trendHeaders, reportData.dailyTrend, [
+      (r) => r.date,
+      (r) => r.count,
+    ]))
+  }
+
+  const filename = `report-${new Date().toISOString().split('T')[0]}.csv`
+  downloadCsv(lines.join('\n'), filename)
+}

@@ -5,7 +5,6 @@
  * Graceful fallback when AI is unavailable.
  */
 
-import { analyzeComplaint } from './ai'
 import type { Complaint, AIAnalysis } from '../types'
 
 // ==========================================
@@ -86,7 +85,7 @@ export interface SpamCheckResult {
 export async function detectSpam(
   title: string,
   description: string,
-  userName: string,
+  _userName: string,
   recentComplaintsByUser?: Complaint[],
 ): Promise<SpamCheckResult> {
   const reasons: string[] = []

@@ -1,55 +1,42 @@
-import { useCallback, useEffect, useMemo, useState, useRef } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import {
   AlertTriangle,
   BarChart3,
-  Bell,
   Building,
   CheckCircle,
   ChevronDown,
   ChevronLeft,
   ChevronRight,
   ChevronUp,
-  Clock,
-  Download,
   FileText,
   Filter,
   LogOut,
-  MapPin,
-  MessageSquare,
   RefreshCw,
   Search,
   Settings,
   ShieldAlert,
   Sliders,
   UserCheck,
-  UserX,
   X,
-  Eye,
   XCircle,
   ArrowUpDown,
   ThumbsUp,
   ThumbsDown,
-  Calendar,
-  Home,
   LayoutDashboard,
-  Users,
 } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Badge } from '../components/ui/Badge'
-import { Button } from '../components/ui/Button'
 import { Card } from '../components/ui/Card'
-import { Input } from '../components/ui/Input'
 import { LoadingSpinner } from '../components/ui/LoadingSpinner'
 import { EmptyState } from '../components/ui/EmptyState'
 import { useToast } from '../contexts/ToastContext'
-import { useTheme } from '../contexts/ThemeContext'
 import { useAuth } from '../contexts/AuthContext'
 import {
   getAllComplaints,
   db,
   getDepartments,
 } from '../services/firebase'
-import { doc, updateDoc, collection, getDocs, addDoc, serverTimestamp } from 'firebase/firestore'
+import { doc, updateDoc } from 'firebase/firestore'
 import { COMPLAINT_CATEGORIES, COMPLAINT_STATUSES, type Complaint, type Department, type Priority, type ComplaintStatus } from '../types'
 
 type SortField = 'createdAt' | 'priority' | 'status' | 'category'
@@ -59,7 +46,6 @@ const PRIORITY_ORDER: Record<string, number> = { High: 3, Medium: 2, Low: 1 }
 
 export function MunicipalityDashboard() {
   const { showToast } = useToast()
-  const { theme } = useTheme()
   const { currentUser, logout } = useAuth()
   const navigate = useNavigate()
   const [complaints, setComplaints] = useState<Complaint[]>([])
@@ -543,8 +529,8 @@ export function MunicipalityDashboard() {
                       ))}
                       {complaints.length === 0 && (
                         <tr>
-                          <td colSpan={6} className="text-center py-10 text-slate-500">
-                            <EmptyState title="No complaints yet" message="Complaints will appear here once citizens submit them" />
+                        <td colSpan={6} className="text-center py-10 text-slate-500">
+                            <EmptyState title="No complaints yet" description="Complaints will appear here once citizens submit them" />
                           </td>
                         </tr>
                       )}
@@ -825,7 +811,7 @@ export function MunicipalityDashboard() {
                       {paginatedComplaints.length === 0 && (
                         <tr>
                           <td colSpan={10} className="text-center py-10 text-slate-500">
-                            <EmptyState title="No complaints found" message="Try adjusting your search or filters" />
+                            <EmptyState title="No complaints found" description="Try adjusting your search or filters" />
                           </td>
                         </tr>
                       )}
@@ -905,7 +891,7 @@ export function MunicipalityDashboard() {
               ))}
               {departments.length === 0 && (
                 <div className="col-span-full">
-                  <EmptyState title="No departments configured" message="Departments will appear here once added by an administrator" />
+                  <EmptyState title="No departments configured" description="Departments will appear here once added by an administrator" />
                 </div>
               )}
             </div>

@@ -113,7 +113,8 @@ export function PublicFeedPage() {
         petTitle,
         petDesc,
         petCat,
-        currentUser.displayName || 'Anonymous Citizen'
+        currentUser.displayName || 'Anonymous Citizen',
+        currentUser.uid
       )
       showToast('Community petition launched successfully!', 'success')
       setPetTitle('')

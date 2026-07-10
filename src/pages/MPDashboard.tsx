@@ -48,8 +48,6 @@ import {
 import { doc, updateDoc } from 'firebase/firestore'
 import { generateChatResponse } from '../services/ai'
 import { exportComplaintPdf } from '../lib/exportPdf'
-import { exportComplaintsExcel } from '../lib/exportExcel'
-import { openComplaintEmailClient } from '../lib/emailReport'
 import { COMPLAINT_CATEGORIES, type Complaint, type Comment } from '../types'
 
 ChartJS.register(ArcElement, BarElement, CategoryScale, LinearScale, Tooltip, Legend)

@@ -1,6 +1,6 @@
 
 import { MongoClient, ServerApiVersion, ObjectId } from "mongodb"
-import type { Collection, Db, WithId } from "mongodb"
+import type { Collection, Db, Document } from "mongodb"
 import type {
   AIAnalysis,
   AnalyticsSnapshot,
@@ -10,7 +10,6 @@ import type {
   Department,
   NotificationItem,
   User,
-  UserRole,
   Comment,
   Petition,
   AuditLog,
@@ -55,7 +54,7 @@ export async function disconnectFromMongo(): Promise<void> {
 }
 
 // Helper to get a collection
-function getCollection<T>(name: string): Collection<T> {
+function getCollection<T extends Document>(name: string): Collection<T> {
   if (!db) {
     throw new Error("MongoDB not connected. Call connectToMongo() first.")
   }
@@ -116,13 +115,12 @@ export async function createComplaint(complaint: Omit<Complaint, "id" | "_id">):
   const complaintsCol = getCollection<Complaint>("complaints")
   const result = await complaintsCol.insertOne({
     ...complaint,
-    _id: new ObjectId(), // MongoDB generates _id, no need for custom id field here
     id: new ObjectId().toHexString(), // Generate a unique string id for client-side use
     createdAt: new Date(),
     updatedAt: new Date(),
     statusHistory: [{ status: "Submitted", timestamp: new Date() }],
   })
-  return result.insertedId.toHexString()
+  return result.insertedId.toString()
 }
 
 export async function updateComplaintStatus(
@@ -133,7 +131,7 @@ export async function updateComplaintStatus(
 ): Promise<void> {
   const complaintsCol = getCollection<Complaint>("complaints")
   await complaintsCol.updateOne(
-    { _id: new ObjectId(_id) },
+    { _id: new ObjectId(_id) as any },
     {
       $set: { status, updatedAt: new Date() },
       $push: {
@@ -149,7 +147,7 @@ export async function updateComplaintAnalysis(
 ): Promise<void> {
   const complaintsCol = getCollection<Complaint>("complaints")
   await complaintsCol.updateOne(
-    { _id: new ObjectId(_id) },
+    { _id: new ObjectId(_id) as any },
     { $set: { aiAnalysis, category: aiAnalysis.category, updatedAt: new Date() } }
   )
 }
@@ -158,8 +156,8 @@ export async function getAllComplaints(): Promise<Complaint[]> {
   const complaintsCol = getCollection<Complaint>("complaints")
   return (await complaintsCol.find({}).sort({ createdAt: -1 }).toArray()).map(doc => ({
     ...doc,
-    _id: doc._id.toHexString(),
-    id: doc._id.toHexString(), // Ensure client-side `id` matches `_id`
+    _id: doc._id.toString(),
+    id: doc._id.toString(), // Ensure client-side `id` matches `_id`
   }))
 }
 
@@ -167,20 +165,20 @@ export async function getUserComplaints(userId: string): Promise<Complaint[]> {
   const complaintsCol = getCollection<Complaint>("complaints")
   return (await complaintsCol.find({ userId }).sort({ createdAt: -1 }).toArray()).map(doc => ({
     ...doc,
-    _id: doc._id.toHexString(),
-    id: doc._id.toHexString(), // Ensure client-side `id` matches `_id`
+    _id: doc._id.toString(),
+    id: doc._id.toString(), // Ensure client-side `id` matches `_id`
   }))
 }
 
 export async function getComplaintById(_id: string): Promise<Complaint | null> {
   const complaintsCol = getCollection<Complaint>("complaints")
-  const complaintDoc = await complaintsCol.findOne({ _id: new ObjectId(_id) })
-  return complaintDoc ? { ...complaintDoc, _id: complaintDoc._id.toHexString(), id: complaintDoc._id.toHexString() } : null
+  const complaintDoc = await complaintsCol.findOne({ _id: new ObjectId(_id) as any })
+  return complaintDoc ? { ...complaintDoc, _id: complaintDoc._id.toString(), id: complaintDoc._id.toString() } : null
 }
 
 export async function upvoteComplaint(complaintId: string, userId: string): Promise<void> {
   const complaintsCol = getCollection<Complaint>("complaints")
-  const complaint = await complaintsCol.findOne({ _id: new ObjectId(complaintId) })
+  const complaint = await complaintsCol.findOne({ _id: new ObjectId(complaintId) as any })
 
   if (complaint) {
     let newUpvotes = complaint.upvotes || 0
@@ -194,7 +192,7 @@ export async function upvoteComplaint(complaintId: string, userId: string): Prom
       newUpvotes += 1
     }
     await complaintsCol.updateOne(
-      { _id: new ObjectId(complaintId) },
+    { _id: new ObjectId(complaintId) as any },
       { $set: { upvotes: newUpvotes, upvotedUsers: newUsers } }
     )
   }
@@ -207,7 +205,7 @@ export async function forwardComplaintToDepartment(
 ): Promise<void> {
   const complaintsCol = getCollection<Complaint>("complaints")
   await complaintsCol.updateOne(
-    { _id: new ObjectId(_id) },
+    { _id: new ObjectId(_id) as any },
     {
       $set: { forwardedDepartment: departmentId, status: "Assigned to Department", updatedAt: new Date() },
       $push: {
@@ -224,6 +222,7 @@ export async function forwardComplaintToDepartment(
     userId: mpUser.uid,
     userName: mpUser.displayName,
     userRole: mpUser.role,
+    timestamp: new Date(),
   })
 }
 
@@ -374,11 +373,29 @@ export async function getAnalytics(): Promise<AnalyticsSnapshot> {
   // Placeholder for officer performance, as full aggregation would require officer assignment logic
   const officerPerformance: { officer: string; count: number }[] = []
 
+  const pendingComplaints = await complaintsCol.countDocuments({ status: "Pending" })
+  const activeComplaints = await complaintsCol.countDocuments({
+    status: { $nin: ["Resolved", "Closed", "Rejected", "Archived"] }
+  })
+  const highPriorityComplaints = await complaintsCol.countDocuments({ priority: "High" })
+
+  // Placeholder for complaintsByWard / complaintsByMonth
+  const complaintsByWard: Array<{ ward: string; count: number }> = []
+  const complaintsByMonth: Array<{ month: string; count: number }> = [
+    { month: "Apr", count: Math.floor(totalComplaints * 0.25) },
+    { month: "May", count: Math.floor(totalComplaints * 0.35) },
+    { month: "Jun", count: totalComplaints - Math.floor(totalComplaints * 0.25) - Math.floor(totalComplaints * 0.35) },
+  ]
+
   return {
     totalComplaints,
     resolvedComplaints,
+    pendingComplaints,
+    activeComplaints,
+    highPriorityComplaints,
     resolutionRate,
-    averageResponseTime: 14, // Placeholder
+    averageResponseTime: 14,
+    averageResolutionTime: 21,
     weeklyReports: [
       { label: "Week 1", value: Math.floor(totalComplaints * 0.2) },
       { label: "Week 2", value: Math.floor(totalComplaints * 0.3) },
@@ -389,8 +406,10 @@ export async function getAnalytics(): Promise<AnalyticsSnapshot> {
       { label: "May", value: Math.floor(totalComplaints * 0.35) },
       { label: "Jun", value: totalComplaints - Math.floor(totalComplaints * 0.25) - Math.floor(totalComplaints * 0.35) },
     ],
-    categoryDistribution: categoryDistribution.map(c => ({ category: c.category, count: c.count })),
-    departmentPerformance: departmentPerformance.map(d => ({ department: d.department, count: d.count })),
+    categoryDistribution: categoryDistribution.map(c => ({ category: c._id, count: c.count })),
+    departmentPerformance: departmentPerformance.map(d => ({ department: d._id, count: d.count })),
     officerPerformance,
+    complaintsByWard,
+    complaintsByMonth,
   }
 }

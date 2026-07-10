@@ -1,9 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import {
   FileText,
-  Download,
-  Calendar,
-  Building2,
   User,
   Filter,
   BarChart3,
@@ -23,7 +20,7 @@ import { getAllComplaints, getDepartments } from '../services/firebase'
 import { exportToPdf } from '../lib/exportPdf'
 import { exportToExcel } from '../lib/exportExcel'
 import { exportToCsv } from '../lib/exportCsv'
-import { COMPLAINT_CATEGORIES, COMPLAINT_STATUSES, type Complaint, type Department, type ReportFilter, type ComplaintCategory } from '../types'
+import { COMPLAINT_STATUSES, type Complaint, type Department, type ReportFilter } from '../types'
 
 type ReportType = 'daily' | 'weekly' | 'monthly'
 type ExportFormat = 'pdf' | 'excel' | 'csv'
@@ -186,7 +183,7 @@ export function ReportsPage() {
 
   const handleExport = async (format: ExportFormat) => {
     if (!reportData) {
-      showToast('Please generate a report first', 'warning')
+      showToast('Please generate a report first', 'info')
       return
     }
     setExporting(format)
