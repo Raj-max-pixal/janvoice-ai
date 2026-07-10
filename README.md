@@ -1,10 +1,11 @@
+
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/Raj-max-pixal/janvoice-ai/main/public/logo.png" width="160"/>
+<img src="./public/logo.png" alt="JanVoice AI Logo" width="170"/>
 
-# JanVoice AI
+# 🏛️ JanVoice AI
 
-### 🏛️ AI-Powered Smart Citizen Grievance Management Platform
+### AI-Powered Smart Citizen Grievance Management Platform
 
 <p align="center">
 Empowering citizens to report public issues, enabling authorities to resolve them faster, and using Artificial Intelligence to improve transparency, accountability, and civic engagement.
@@ -70,7 +71,8 @@ JanVoice AI is an intelligent civic-tech platform that bridges the gap between *
 # 📸 Preview
 
 <p align="center">
-<img src="./screenshots/home.png" width="90%">
+  
+<img width="1908" height="848" alt="image" src="https://github.com/user-attachments/assets/f11226b7-825b-4e39-afa4-0f988550df9f" />
 </p>
 
 <p align="center">
