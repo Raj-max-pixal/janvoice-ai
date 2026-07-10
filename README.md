@@ -1,102 +1,450 @@
+<div align="center">
+
+<img src="https://raw.githubusercontent.com/Raj-max-pixal/janvoice-ai/main/public/logo.png" width="160"/>
+
 # JanVoice AI
 
-JanVoice AI is a modern civic-tech platform that helps citizens raise public concerns, supports officials in triaging them, and makes community progress visible through a polished digital experience.
+### 🏛️ AI-Powered Smart Citizen Grievance Management Platform
 
-## What this project does
+<p align="center">
+Empowering citizens to report public issues, enabling authorities to resolve them faster, and using Artificial Intelligence to improve transparency, accountability, and civic engagement.
+</p>
 
-JanVoice AI combines a citizen-facing complaint workflow with AI-assisted analysis and transparent reporting. The experience is designed for public-service use cases such as municipal issue reporting, constituency feedback, and policy prioritization.
+<p align="center">
 
-## Core experience
+<a href="https://janvoice-ai-gxcz.vercel.app">
+<img src="https://img.shields.io/badge/🌐_Live_Demo-Visit_Now-blue?style=for-the-badge"/>
+</a>
 
-- Citizens can submit complaints, suggestions, and supporting evidence.
-- AI analysis helps summarize issues and suggest a likely category, priority, and action.
-- MPs, officials, and admins can review requests through role-aware dashboards.
-- A public feed and analytics view make progress easier to understand and trust.
+<a href="https://github.com/Raj-max-pixal/janvoice-ai">
+<img src="https://img.shields.io/github/stars/Raj-max-pixal/janvoice-ai?style=for-the-badge"/>
+</a>
 
-## Tech stack
+<img src="https://img.shields.io/github/forks/Raj-max-pixal/janvoice-ai?style=for-the-badge"/>
 
-- React + Vite + TypeScript
-- Tailwind CSS
-- Firebase Authentication and Firestore
-- Google Gemini API
-- Chart.js and react-chartjs-2
-- React Router and Framer Motion
+<img src="https://img.shields.io/github/license/Raj-max-pixal/janvoice-ai?style=for-the-badge"/>
 
-## Run locally
+</p>
 
-### Prerequisites
-- Node.js 18+
-- npm
-- Firebase project (optional for demo mode)
-- Gemini API key (optional for AI flows)
+<p align="center">
 
-### Install and start
+<img src="https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=white"/>
+
+<img src="https://img.shields.io/badge/Vite-Latest-646CFF?style=flat-square&logo=vite&logoColor=white"/>
+
+<img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white"/>
+
+<img src="https://img.shields.io/badge/Firebase-FFCA28?style=flat-square&logo=firebase&logoColor=black"/>
+
+<img src="https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white"/>
+
+<img src="https://img.shields.io/badge/Google_Gemini-AI-4285F4?style=flat-square&logo=google&logoColor=white"/>
+
+<img src="https://img.shields.io/badge/TailwindCSS-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white"/>
+
+</p>
+
+---
+
+### 🚀 Building Smarter Communities Through AI
+
+JanVoice AI is an intelligent civic-tech platform that bridges the gap between **citizens** and **government authorities** through AI-powered complaint management, analytics, and transparent public engagement.
+
+</div>
+
+---
+
+## ✨ Features
+
+- 🤖 AI-powered complaint analysis
+- 📍 Smart issue categorization
+- 📊 Real-time analytics dashboard
+- 👥 Citizen, MP & Admin portals
+- 🔔 Complaint tracking & status updates
+- 📷 Image upload support
+- 📈 Interactive charts & insights
+- 🌐 Modern responsive interface
+
+---
+
+# 📸 Preview
+
+<p align="center">
+<img src="./screenshots/home.png" width="90%">
+</p>
+
+<p align="center">
+<i>Modern landing page with AI-powered citizen grievance management.</i>
+</p>
+
+---
+
+# ✨ Key Features
+
+<table>
+<tr>
+
+<td width="50%">
+
+### 🤖 AI Complaint Analysis
+
+- AI-powered complaint summarization
+- Automatic issue categorization
+- Priority prediction
+- Smart recommendations
+
+</td>
+
+<td width="50%">
+
+### 👨‍💼 Role-Based Dashboards
+
+- Citizen Dashboard
+- MP Dashboard
+- Admin Dashboard
+- Secure Authentication
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+### 📊 Analytics
+
+- Complaint statistics
+- Category distribution
+- Resolution trends
+- Interactive charts
+
+</td>
+
+<td>
+
+### 🌍 Public Transparency
+
+- Public complaint feed
+- Complaint tracking
+- Status timeline
+- Community engagement
+
+</td>
+
+</tr>
+</table>
+
+---
+
+# 🖼️ Screenshots
+
+| Landing Page |
+|--------------|
+| <img width="1275" height="847" alt="image" src="https://github.com/user-attachments/assets/319e2db0-2573-49d3-b564-51dfa7cf3452" />
+
+| Dashboard |
+|--------------|
+| <img width="1289" height="841" alt="image" src="https://github.com/user-attachments/assets/424e25d8-ed77-4b43-9f07-e07f657377ac" />
+
+
+| Complaint Details | Analytics |
+|-------------------|-----------|
+| <img src="./screenshots/complaint.png"/> | <img src="./screenshots/analytics.png"/> |
+
+---
+
+# 🏗️ System Architecture
+
+```text
+                   Citizens
+                       │
+                       ▼
+          Complaint Submission Portal
+                       │
+                       ▼
+          React + Vite Frontend
+                       │
+        ┌──────────────┼──────────────┐
+        ▼              ▼              ▼
+ Firebase Auth     Firestore      Gemini AI
+        │              │              │
+        └──────────────┼──────────────┘
+                       │
+                       ▼
+             AI Complaint Analysis
+                       │
+                       ▼
+          Admin / MP / Citizen Portal
+                       │
+                       ▼
+            Analytics & Public Feed
+```
+
+---
+
+# 🎯 Main Modules
+
+| Module | Description |
+|---------|-------------|
+| 🏠 Landing Page | Public introduction and awareness |
+| 🔐 Authentication | Secure Login & Registration |
+| 📝 Complaint System | Register and manage complaints |
+| 🤖 AI Assistant | AI-powered recommendations |
+| 📊 Analytics | Complaint insights & charts |
+| 👨‍💼 Admin Panel | Complaint management |
+| 🏛 MP Dashboard | Constituency monitoring |
+| 👤 Citizen Dashboard | Personal complaint tracking |
+
+---
+
+# 💡 Why JanVoice AI?
+
+✅ AI-powered issue analysis
+
+✅ Transparent governance
+
+✅ Faster complaint resolution
+
+✅ Better communication between citizens and officials
+
+✅ Modern responsive UI
+
+✅ Secure authentication
+
+✅ Scalable architecture
+
+---
+# 🚀 Getting Started
+
+## Prerequisites
+
+Before running JanVoice AI, make sure you have:
+
+- Node.js **18+**
+- npm or yarn
+- Firebase Project (Optional)
+- Google Gemini API Key (Optional)
+
+---
+
+## 📥 Installation
+
+Clone the repository
+
+```bash
+git clone https://github.com/Raj-max-pixal/janvoice-ai.git
+```
+
+Move into the project
+
+```bash
+cd janvoice-ai
+```
+
+Install dependencies
+
 ```bash
 npm install
+```
+
+Start the development server
+
+```bash
 npm run dev
 ```
 
-### Build for production
+Open your browser
+
+```
+http://localhost:5173
+```
+
+---
+
+# ⚙️ Environment Variables
+
+Create a `.env` file in the root directory.
+
+```env
+VITE_FIREBASE_API_KEY=
+VITE_FIREBASE_AUTH_DOMAIN=
+VITE_FIREBASE_PROJECT_ID=
+VITE_FIREBASE_STORAGE_BUCKET=
+VITE_FIREBASE_MESSAGING_SENDER_ID=
+VITE_FIREBASE_APP_ID=
+
+VITE_GEMINI_API_KEY=
+```
+
+---
+
+# 📂 Project Structure
+
+```text
+JanVoice-AI
+│
+├── public/
+│
+├── src/
+│   ├── assets/
+│   ├── components/
+│   ├── contexts/
+│   ├── hooks/
+│   ├── pages/
+│   ├── services/
+│   ├── types/
+│   ├── utils/
+│   └── App.tsx
+│
+├── screenshots/
+│
+├── package.json
+├── vite.config.ts
+└── README.md
+```
+
+---
+
+# 🛠️ Tech Stack
+
+| Category | Technologies |
+|----------|--------------|
+| Frontend | React 19, Vite, TypeScript |
+| Styling | Tailwind CSS |
+| Backend | Firebase |
+| Database | Firestore, MongoDB |
+| Authentication | Firebase Auth |
+| AI | Google Gemini API |
+| Charts | Chart.js |
+| Routing | React Router |
+| Animation | Framer Motion |
+| Deployment | Vercel |
+
+---
+
+# 🌍 Deployment
+
+Build the project
+
 ```bash
 npm run build
 ```
 
-## Environment variables
+Preview production build
 
-Create a .env file in the project root:
-```env
-VITE_FIREBASE_API_KEY=your_firebase_api_key
-VITE_FIREBASE_AUTH_DOMAIN=your_project_id.firebaseapp.com
-VITE_FIREBASE_PROJECT_ID=your_project_id
-VITE_FIREBASE_STORAGE_BUCKET=your_project_id.appspot.com
-VITE_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
-VITE_FIREBASE_APP_ID=your_app_id
-VITE_GEMINI_API_KEY=your_gemini_api_key
+```bash
+npm run preview
 ```
 
-If these values are not provided, the app runs in a demo-friendly mode for local previews.
+Deploy easily using
 
-## Project structure
+- Vercel
+- Firebase Hosting
+- Netlify
 
-```text
-src/
-  components/
-  contexts/
-  hooks/
-  pages/
-  services/
-  types/
-```
+---
 
-## Release status
+# 🗺️ Roadmap
 
-- Current release: RC1
-- Version: 1.0.0
-- Status: Demo-ready and production-polish pass complete
+- ✅ Citizen Dashboard
+- ✅ Admin Dashboard
+- ✅ MP Dashboard
+- ✅ AI Complaint Analysis
+- ✅ Analytics
+- ✅ Complaint Tracking
+- ✅ Authentication
+- 🔄 Real-time Notifications
+- 🔄 Mobile App
+- 🔄 Multi-language Support
+- 🔄 AI Chat Assistant
+- 🔄 Government API Integration
 
-## Recommended next steps
+---
 
-1. Connect a real Firebase project and Firestore rules.
-2. Add production storage and real media handling.
-3. Replace demo AI behavior with live backend integrations if needed.
-4. Deploy to Vercel, Netlify, or Firebase Hosting.
+# 🤝 Contributing
 
-## Contributing
+Contributions are welcome!
 
-Contributions are welcome! Please follow these steps:
 1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Submit a pull request
+2. Create a new feature branch
 
-## License
+```bash
+git checkout -b feature/your-feature
+```
 
-This project is built for the Google Cloud Build with AI: Code for Communities Hackathon.
+3. Commit your changes
 
-## Acknowledgments
+```bash
+git commit -m "Add amazing feature"
+```
 
-- Google Cloud Build with AI: Code for Communities Hackathon
-- Firebase
-- Google Gemini API
-- React community
-- Tailwind CSS
+4. Push your branch
+
+```bash
+git push origin feature/your-feature
+```
+
+5. Open a Pull Request 🚀
+
+---
+
+# 👨‍💻 Author
+
+### Raj
+
+Founder of **MultiMax**
+
+Passionate about
+
+- Artificial Intelligence
+- Full Stack Development
+- Civic Technology
+- Open Source
+- Cyber Security
+
+GitHub
+
+```
+https://github.com/Raj-max-pixal
+```
+
+---
+
+# 📜 License
+
+This project was developed as part of
+
+**Google Cloud Build with AI – Code for Communities Hackathon**
+
+Feel free to use this project for learning and educational purposes.
+
+---
+
+# ⭐ Support the Project
+
+If you found this project helpful,
+
+🌟 Star this repository
+
+🍴 Fork it
+
+🐛 Report Issues
+
+💡 Suggest new Features
+
+Every contribution helps improve JanVoice AI.
+
+---
+
+<div align="center">
+
+## ❤️ Building Better Communities Through AI
+
+**JanVoice AI**
+
+Empowering Citizens • Assisting Governments • Creating Transparency
+
+Made with ❤️ by Raj
+
+</div>
