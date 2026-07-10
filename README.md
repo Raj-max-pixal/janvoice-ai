@@ -1,7 +1,8 @@
 
 <div align="center">
 
-<img src="./public/logo.png" alt="JanVoice AI Logo" width="170"/>
+ <img width="180" height="180" alt="image" src="https://github.com/user-attachments/assets/386b6514-8120-46c7-8231-d00faff3e20f" />
+
 
 # 🏛️ JanVoice AI
 
