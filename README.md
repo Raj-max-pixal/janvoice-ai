@@ -69,16 +69,41 @@ JanVoice AI is an intelligent civic-tech platform that bridges the gap between *
 
 ---
 
+## 🔗 Quick Links
+
+<div align="center">
+
+| 🌐 Resource | 🚀 Link |
+|:-----------:|:--------|
+| 💻 **Live Website** | https://janvoice-ai-gxcz.vercel.app |
+| 📂 **GitHub Repository** | https://github.com/Raj-max-pixal/janvoice-ai |
+| 📝 **Medium Article** | https://medium.com/@rajasaranyaraj20/%EF%B8%8F-building-janvoice-ai-an-ai-powered-smart-citizen-grievance-management-platform-b7c8e9fbc0e4?sharedUserId=rajasaranyaraj20 |
+| 🎥 **YouTube Demo** | https://youtu.be/XbbxHpRO0C4?si=HGpBCRlrxaomTWlU |
+| 🐞 **Report Issues** | https://github.com/Raj-max-pixal/janvoice-ai/issues |
+
+</div>
+
+---
+
+</div>
+
+---
+
 # 📸 Preview
 
 <p align="center">
   
+<img width="1536" height="1024" alt="thub" src="https://github.com/user-attachments/assets/c84f36f7-d494-4f06-a21b-de6a9fc06645" />
+
+
 <img width="1908" height="848" alt="image" src="https://github.com/user-attachments/assets/f11226b7-825b-4e39-afa4-0f988550df9f" />
 </p>
 
 <p align="center">
 <i>Modern landing page with AI-powered citizen grievance management.</i>
 </p>
+
+
 
 ---
 
