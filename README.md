@@ -148,10 +148,6 @@ JanVoice AI is an intelligent civic-tech platform that bridges the gap between *
 | <img width="1289" height="841" alt="image" src="https://github.com/user-attachments/assets/424e25d8-ed77-4b43-9f07-e07f657377ac" />
 
 
-| Complaint Details | Analytics |
-|-------------------|-----------|
-| <img src="./screenshots/complaint.png"/> | <img src="./screenshots/analytics.png"/> |
-
 ---
 
 # 🏗️ System Architecture
